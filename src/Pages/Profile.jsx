@@ -1,20 +1,21 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectMissions } from '../redux/missions/missions';
+import { selectRockets } from '../redux/rockets/rocketsSlice';
 
 const Profile = () => {
-  const rockets = useSelector((state) => state.rockets.rockets);
-  const missions = useSelector((state) => state.missions.missions);
+  const missions = useSelector(selectMissions);
+  const rockets = useSelector(selectRockets);
 
   const reservedRockets = rockets.filter((rocket) => rocket.reserved);
-  const reservedMissions = missions.filter((mission) => mission.reserved);
 
   return (
     <div>
       <h1>My Profile</h1>
       <h2>My Missions</h2>
       <ul>
-        {reservedMissions.map((mission) => (
-          <li key={mission.mission_id}>{mission.mission_name}</li>
+        {missions.map((mission) => (
+          <li key={mission.id}>{mission.name}</li>
         ))}
       </ul>
       <h2>My Rockets</h2>
